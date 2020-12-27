@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - dev
+      - dev-4.0
 jobs:
   build-jdk11:
     runs-on: ubuntu-latest
