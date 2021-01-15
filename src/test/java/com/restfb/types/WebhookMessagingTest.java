@@ -113,7 +113,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertNotNull(item);
     assertEquals("mid.1458696618141:b4ef9d19ec21086067", item.getMid());
     assertNull(item.getText());
-    assertEquals(51L, item.getSeq().longValue());
     assertFalse(item.hasQuickReply());
     assertFalse(item.hasNlp());
     assertTrue(item.hasAttachment());
@@ -151,7 +150,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertNotNull(item);
     assertEquals("mid.1458696618141:b4ef9d19ec21086067", item.getMid());
     assertNull(item.getText());
-    assertEquals(51L, item.getSeq().longValue());
     assertFalse(item.hasQuickReply());
     assertFalse(item.hasNlp());
     assertTrue(item.hasAttachment());
@@ -190,7 +188,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertNotNull(item);
     assertEquals("mid.1458696618141:b4ef9d19ec21086067", item.getMid());
     assertNull(item.getText());
-    assertEquals(51L, item.getSeq().longValue());
     assertFalse(item.hasQuickReply());
     assertFalse(item.hasNlp());
     assertTrue(item.hasAttachment());
@@ -222,7 +219,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertNotNull(item);
     assertEquals("mid.1457764197618:41d102a3e1ae206a38", item.getMid());
     assertEquals("hello, world!", item.getText());
-    assertEquals(73L, item.getSeq().longValue());
     assertTrue(item.getAttachments().isEmpty());
   }
 
@@ -388,7 +384,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertEquals("hello, world!", item.getText());
     assertEquals("1517776481860111", item.getAppId());
     assertEquals("DEVELOPER_DEFINED_METADATA_STRING", item.getMetadata());
-    assertEquals(73L, item.getSeq().longValue());
     assertTrue(item.getAttachments().isEmpty());
   }
 
@@ -411,7 +406,6 @@ class WebhookMessagingTest extends AbstractJsonMapperTests {
     assertEquals("hello, world!", item.getText());
     assertEquals("1517776481860111", item.getAppId());
     assertEquals("DEVELOPER_DEFINED_METADATA_STRING", item.getMetadata());
-    assertEquals(73L, item.getSeq().longValue());
     assertTrue(item.getAttachments().isEmpty());
   }
 
