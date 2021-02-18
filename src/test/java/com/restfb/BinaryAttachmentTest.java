@@ -29,6 +29,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class BinaryAttachmentTest {
 
@@ -65,25 +67,12 @@ class BinaryAttachmentTest {
     assertThat(att).hasContentType("image/png");
   }
 
-  @Test
-  void checkContentTypeBytes_imagePng() {
+  @ParameterizedTest
+  @CsvSource({"example.png,image/png", "example.html,text/html", "example.json,application/octet-stream"})
+  void checkContentTypeBytesParams(String filename, String contentType) {
     String attachmentData = "this is a short string";
-    BinaryAttachment att = BinaryAttachment.with("example.png", attachmentData.getBytes());
-    assertThat(att).hasContentType("image/png");
-  }
-
-  @Test
-  void checkContentTypeBytes_html() {
-    String attachmentData = "this is a short string";
-    BinaryAttachment att = BinaryAttachment.with("example.html", attachmentData.getBytes());
-    assertThat(att).hasContentType("text/html");
-  }
-
-  @Test
-  void checkContentTypeBytes_fallback() {
-    String attachmentData = "this is a short string";
-    BinaryAttachment att = BinaryAttachment.with("example.json", attachmentData.getBytes());
-    assertThat(att).hasContentType("application/octet-stream");
+    BinaryAttachment att = BinaryAttachment.with(filename, attachmentData.getBytes());
+    assertThat(att).hasContentType(contentType);
   }
 
   @Test
