@@ -33,8 +33,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.restfb.WebRequestor.Response;
 import com.restfb.exception.FacebookJsonMappingException;
@@ -321,23 +324,19 @@ class FacebookClientTest {
     });
   }
 
-  @Test
-  void deleteObjectReturnsJson() {
-    FacebookClient facebookClient = facebookClientWithResponse(new Response(200, "{\"success\":true}"));
+  @ParameterizedTest
+  @MethodSource("provideDeleteResponseBody")
+  void deleteObjetReturnValue(String responseString) {
+    FacebookClient facebookClient = facebookClientWithResponse(new Response(200, responseString));
     assertThat(facebookClient.deleteObject("12345")).isTrue();
   }
 
-  @Test
-  void deleteObjectReturnsJsonGreetingMessengerPlatform() {
-    FacebookClient facebookClient =
-        facebookClientWithResponse(new Response(200, "{\"result\":\"Successfully deleted greeting\"}"));
-    assertThat(facebookClient.deleteObject("12345")).isTrue();
-  }
-
-  @Test
-  void deleteObjectReturnsText() {
-    FacebookClient facebookClient = facebookClientWithResponse(new Response(200, "true"));
-    assertThat(facebookClient.deleteObject("12345")).isTrue();
+  private static Stream<String> provideDeleteResponseBody() {
+    return Stream.of( //
+      "{\"success\":true}", // simple json
+      "{\"result\":\"Successfully deleted greeting\"}", // Json Greeting from Messenger Platform
+      "true" // only text
+    );
   }
 
   @Test
